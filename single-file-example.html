@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      .avatar {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+      
+
+/*  Tutorial sa: 
+    //TASK1:
+      const user = {
+        name: 'Hedy Lamarr',
+        imageUrl: 'https://i.imgur.com/yXOvdOSs.jpg',
+        imageSize: 110,
+      };
+    
+      // Component
+      function MyApp() {
+        return (
+        <div>
+          <h1>Hello, world!</h1>
+          <img className="avatar" src={user.imageUrl} alt={'Photo of ' + user.name}
+          style={{
+            width: user.imageSize,
+            height: user.imageSize
+          }}
+          />
+          
+        </div>);
+      }
+
+    //TASK2 - liste:
+    */
+    const isLoggedIn = false;
+    const products = [
+      { title: 'Cabbage', id: 1, isFruit: false, },
+      { title: 'Garlic', id: 2, isFruit: false, },
+      { title: 'Apple', id: 3, isFruit: true, },
+    ];
+
+    // Component
+    function MyApp() {
+      let content;
+      let conditionalContent;
+      
+      content = products.map(product => 
+          <li key={product.id}
+              style={{
+                color: product.isFruit ? 'magenta': 'darkgreen'
+              }}
+          >
+            {product.title}
+          </li>
+      );
+
+      if(isLoggedIn) {
+        conditionalContent = <div>Hi User!</div>
+      } else {
+        conditionalContent = <div>Log in</div>
+      }
+
+      return (
+        <>
+          <ul>{content}</ul>
+          <div>{conditionalContent}</div>
+          <MyButton />
+        </>
+      );
+    }
+
+    import { useState } from 'react';
+
+    function MyButton() {
+
+      const [count, setCount] = useState(0); // convention is [something, setSomething]
+
+      function handleClick() {
+        //alert('You clicked the button!');
+        setCount(count + 1);
+      }
+
+      return (
+        <button onClick={handleClick}>
+          Click {count} times
+        </button>
+      );
+    }
+
+      const container = document.getElementById('root');
+      const root = ReactDOM.createRoot(container);
+      root.render(<MyApp />);
+
+    </script>
+    <!--
+      Note: this page is a great way to try React but it's not suitable for production.
+      It slowly compiles JSX with Babel in the browser and uses a large development build of React.
+
+      Read this section for a production-ready setup with JSX:
+      https://reactjs.org/docs/add-react-to-a-website.html#add-jsx-to-a-project
+
+      In a larger project, you can use an integrated toolchain that includes JSX instead:
+      https://reactjs.org/docs/create-a-new-react-app.html
+
+      You can also use React without JSX, in which case you can remove Babel:
+      https://reactjs.org/docs/react-without-jsx.html
+    -->
+  </body>
+</html>
